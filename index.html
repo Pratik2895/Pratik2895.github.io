@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pratik Bhikadiya - Portfolio</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+<style>
+
+/*======================================
+//--//-->   ABOUT
+======================================*/
+
+.about-mf .box-shadow-full {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.about-mf .about-img {
+  margin-bottom: 2rem;
+}
+
+.about-mf .about-img img {
+  margin-left: 10px;
+}
+
+
+.skill-mf .progress {
+  /* background-color: #cde1f8; */
+  margin: .5rem 0 1.2rem 0;
+  border-radius: 0;
+  height: .7rem;
+}
+
+.skill-mf .progress .progress-bar {
+  height: .7rem;
+  background-color: #39efff;
+}
+
+
+/* Animation styles */
+#typing-animation {
+  position: relative;
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3s steps(20, end) infinite;
+}
+
+#typing-animation:before {
+  content: "";
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #ccc;
+  animation: typing-cursor 0.5s ease-in-out infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes typing-cursor {
+  from { width: 5px; }
+  to { width: 0; }
+}
+
+
+/* project image zoom effect */
+.zoom-effect {
+  overflow: hidden;
+  transition: transform 0.3s ease-out;
+}
+
+.zoom-effect:hover {
+  transform: scale(1.1);
+}
+
+/* ===== Replace Yellow Accent Text with #39efff ===== */
+
+.text-primary,
+.ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover,
+.ftco-navbar-light .navbar-nav > .nav-item.active > a,
+.hero .text span,
+.heading-section h2 span,
+.heading-section .subheading,
+.btn-primary,
+.btn-primary:hover,
+a,
+a:hover {
+  color: #39efff !important;
+}
+
+/* Buttons background */
+.btn-primary {
+  background: #39efff !important;
+  border: 1px solid #39efff !important;
+  color: #000 !important; /* contrast for bright cyan */
+}
+
+/* Button hover */
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background: #39efff !important;
+  border: 1px solid #39efff !important;
+  color: #000 !important;
+  box-shadow: none !important;
+}
+
+/* Counter numbers */
+.number {
+  color: #39efff !important;
+}
+
+/* Icons */
+.icon {
+  color: #39efff !important;
+}
+
+/* Loader color */
+.path {
+  stroke: #39efff !important;
+}
+
+.resume-wrap .date {
+  color: #39efff !important;
+}
+
+/* Normal navbar link color */
+  .navbar .nav-link {
+    color: #39efff !important; 
+    transition: color 0.3s ease;
+  }
+
+  /* Hover effect */
+  .navbar .nav-link:hover {
+    color: #ffffff !important; 
+  }
+
+  /* Active link (current section) */
+  .navbar .nav-link.active {
+    color: #ffffff !important; 
+  }
+
+  /* Optional: brand color */
+  .navbar .navbar-brand {
+    color: #39efff !important;
+  }
+
+  .navbar .navbar-brand:hover {
+    color: #ffffff !important;
+  }
+
+</style>
+  </head>
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+	  
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html">Pratik Bhikadiya</a>
+	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav nav ml-auto">
+	          <li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
+	          <li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
+	          <li class="nav-item"><a href="#resume-section" class="nav-link"><span>Resume</span></a></li>
+	          <li class="nav-item"><a href="#project-section" class="nav-link"><span>Projects</span></a></li>
+	          <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+
+	  <section id="home-section" class="hero">
+		  <div class="home-slider owl-carousel">
+	       <div class="slider-item ">
+	      	<div class="overlay"></div>
+	         <div class="container">
+	          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
+	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(images/LINKEDIN\ DP.png);">
+	          	 <div class="overlay"></div>
+	          	</div>
+		          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+		          	<div class="text">
+		          		<span class="subheading">Hello!</span>
+			            <h1 class="mb-4 mt-3">I'm <span>Pratik Bhikadiya</span></h1>
+
+						<!-- Element to contain animated typing -->
+						<span id="typing-animation"></span>
+
+						<script>
+						const typingAnimationElement = document.getElementById('typing-animation');
+						const typingTexts = [
+						'Data Engineer  ',
+						'Analytics Engineer  ',
+						'BI Engineer  ',
+						];
+
+						function playTypingAnimation(text) {
+						for (let i = 0; i < text.length; i++) {
+							setTimeout(() => {
+							typingAnimationElement.textContent += text[i];
+							}, i * 150); 
+						}
+						setTimeout(() => {
+							typingAnimationElement.textContent = '';
+							playTypingAnimation(typingTexts[(typingTexts.indexOf(text) + 1) % typingTexts.length]);
+						}, text.length * 150 + 1000);
+						}
+						playTypingAnimation(typingTexts[0]);
+						</script>
+
+						<br><br>
+			            <h2>Data / Analytics Engineer</h2>
+						<p><a href="https://www.linkedin.com/in/pratikbhikadiya/" target="_blank" class="btn btn-primary py-3 px-4">LinkedIn</a> 
+							<a href="https://github.com/Pratik2895/" target="_blank" class="btn btn-white btn-outline-white py-3 px-4">My Works</a></p>
+		            </div>
+		          </div>
+	        	</div>
+	        </div>
+	      </div>
+		</div>
+    </section>
+
+    <section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
+    	<div class="container">
+			<div class="row">
+				<div class="row d-flex align-items-stretch">
+					<div class="col-md-6 col-lg-5 d-flex">
+						<div class="img-about img d-flex align-items-stretch">
+							<div class="overlay">
+								<div class="row">
+									<div class="col-sm-6 col-md-5">
+									  <div class="about-img">
+										<img src="images/about-me.png" class="img-fluid rounded b-shadow-a" alt="Pratik Bhikadiya">
+									  </div>
+									</div>
+									<div class="col-sm-6 col-md-7">
+									  <div class="about-info">
+										<p><span class="title-s">Name: </span> <span>Pratik Bhikadiya</span></p>
+										<p><span class="title-s">Job Role: </span> <span>Data/Analytics Engineer</span></p>
+										<p><span class="title-s">Experience: </span> <span>5+ Years</span></p>
+										<p><span class="title-s">Address: </span> <span>Brampton, ON, Canada</span></p>
+									  </div>
+									</div>
+								  </div>
+
+								<div class="skill-mf">
+									<p class="title-s">Technical Skills</p>
+									<span>PySpark & Spark SQL</span> <span class="pull-right">95%</span>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar" style="width: 95%;" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									
+									<span>SQL & Python</span> <span class="pull-right">90%</span>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									
+									<span>Databricks & Delta Lake</span> <span class="pull-right">90%</span>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									
+									<span>AWS / Azure Data Stack</span> <span class="pull-right">85%</span>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									
+									<span>Power BI & Tableau</span> <span class="pull-right">85%</span>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
+						<div class="row justify-content-start pb-3">
+							<div class="col-md-12 heading-section ftco-animate">
+								<h1 class="big">About</h1>
+								<h2 class="mb-4">About Me</h2>
+								
+								<p>Data/Analytics Engineer with 5+ years of experience designing scalable data platforms, lakehouse architectures, and high-impact BI systems. Advanced expertise in PySpark, Databricks, Spark SQL, and AWS/Azure ecosystems. I have a proven record of optimizing distributed workloads, enforcing data governance, improving SLA compliance, and enabling executive decision-making through trusted data products.</p>
+								<ul class="about-info mt-4 px-md-0 px-2">
+									<li class="d-flex"><span>Profile:</span> <span>Data Engineering &amp; BI Analytics</span></li>
+									<li class="d-flex"><span>Domain:</span> <span>Finance, Supply Chain, Tax &amp; Logistics</span></li>
+									<li class="d-flex"><span>Education:</span> <span>Master of Management - Business Data Analytics</span></li>
+									<li class="d-flex"><span>Language:</span> <span>English</span></li>
+									<li class="d-flex"><span>Certifications:</span> <span>Databricks Data Engineer, Azure DP-203, Power BI PL-300</span></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="counter-wrap ftco-animate d-flex mt-md-3">
+							<div class="text">
+								<p class="mb-4">
+									<span class="number" data-number="5">0</span> <span>+</span>
+									<span>&nbsp; Years Experience</span>
+								</p>
+								<p><a href="https://www.linkedin.com/in/pratikbhikadiya/" target="_blank" class="btn btn-primary py-3 px-3">LinkedIn</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </section>
+
+    <section class="ftco-section ftco-no-pb" id="resume-section">
+    	<div class="container">
+    		<div class="row justify-content-center pb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<h1 class="big big-2">Resume</h1>
+            <h2 class="mb-4">Resume</h2>
+            <p>Proven expertise in data pipelines, big data technologies, and delivering executive dashboards. Here is a timeline of my professional experience and education.</p>
+          </div>
+        </div>
+
+		<div class="row">
+			<h1 class="big-4">Experience</h1>
+			<div class="underline"></div>
+		</div>
+		<br>
+		
+		<div class="row">
+				<div class="col-md-6">
+					<div class="resume-wrap ftco-animate">
+						<span class="date">Apr 2024 – Present</span>
+						<h2>Data Engineer / Analytics Engineer</h2>
+						<span class="position">Intuit TurboTax - Brampton, ON</span>
+						<p class="mt-4">
+							<ul>
+								<li>Architected enterprise DataMart pipelines for Marketing, Finance, Product, and Sales using <strong>Databricks + PySpark</strong>, reducing latency by 35%.</li>
+								<li>Designed scalable clickstream ingestion pipelines (Kafka → EMR/Databricks) processing millions of daily events.</li>
+								<li>Implemented Bronze-Silver-Gold medallion architecture with incremental Delta processing.</li>
+								<li>Built automated SLA monitoring and alerting framework (Databricks Workflows + CloudWatch), improving MTTR by 40%.</li>
+							</ul>
+						</p>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="resume-wrap ftco-animate">
+						<span class="date">Apr 2022 – Dec 2022</span>
+						<h2>BI Engineer</h2>
+						<span class="position">ArcelorMittal Nippon Steel India</span>
+						<p class="mt-4">
+							<ul>
+								<li>Developed Spark-based transformation pipelines in <strong>Azure Databricks</strong> integrating Azure SQL, Blob Storage, and Synapse.</li>
+								<li>Orchestrated enterprise ETL workflows in <strong>Azure Data Factory</strong>, reducing manual intervention by 40%.</li>
+								<li>Engineered curated data mart layers with referential integrity controls supporting monthly executive financial reporting.</li>
+							</ul>
+						</p>
+					</div>
+				</div>
+
+				<div class="col-md-12">
+					<div class="resume-wrap ftco-animate">
+						<span class="date">Jun 2016 – Mar 2022</span>
+						<h2>BI Analyst</h2>
+						<span class="position">Adani Ports and SEZ Ltd.</span>
+						<p class="mt-4">
+							<ul>
+								<li>Built and maintained large-scale ETL workflows and warehouse schemas supporting port operations, logistics, and finance.</li>
+								<li>Improved data processing efficiency by 20% through SQL optimization while maintaining 99.5% SLA compliance.</li>
+								<li>Delivered 20+ executive dashboards (Power BI/Tableau) tracking operational KPIs, revenue, and cargo throughput.</li>
+							</ul>
+						</p>
+					</div>
+				</div>
+			</div>
+
+		<br><br>
+
+		<div class="row">
+			<h1 class="big-4">Education</h1>
+			<div class="underline"></div>
+		</div>
+		<br>
+		
+			<div class="row">
+    			<div class="col-md-4">
+    				<div class="resume-wrap ftco-animate">
+    					<span class="date">2023 - 2024</span>
+    					<h2>Master of Management (Honors)</h2>
+    					<span class="position">University of Windsor, Canada</span>
+    					<p class="mt-4">Specialization: Business Data Analytics.</p>
+    				</div>
+    			</div>
+
+    			<div class="col-md-4">
+    				<div class="resume-wrap ftco-animate">
+    					<span class="date">2020 - 2021</span>
+    					<h2>PG Diploma (Honors)</h2>
+    					<span class="position">Maharaja Sayajirao University</span>
+    					<p class="mt-4">Specialization: Marketing Management.</p>
+    				</div>
+				</div>
+
+				<div class="col-md-4">
+    				<div class="resume-wrap ftco-animate">
+    					<span class="date">2012 - 2016</span>
+    					<h2>Bachelor of Technology (Honors)</h2>
+    					<span class="position">Maharaja Sayajirao University</span>
+    					<p class="mt-4">Specialization: Engineering.</p>
+    				</div>
+				</div>
+    		</div>
+
+    		<div class="row justify-content-center mt-5">
+    			<div class="col-md-6 text-center ftco-animate">
+    				<!-- CV LINK UPDATED HERE -->
+    				<p><a href="PRATIK_A_BHIKADIYA_CV.pdf" target="_blank" class="btn btn-primary py-4 px-5">Download Resume</a></p>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+
+    <section class="ftco-section" id="project-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h1 class="big big-2">Projects</h1>
+            <h2 class="mb-4">Data Projects</h2>
+            <p>Below are sample projects reflecting my expertise in Big Data, Data Engineering, and Analytics.</p>
+          </div>
+        </div>
+        <div class="row d-flex">
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <!-- PROJECT 1 IMAGE UPDATED -->
+              <a href="https://github.com/Pratik2895/" class="block-20 zoom-effect" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop');"></a>
+              <div class="text mt-3 float-right d-block">
+                <h3 class="heading"><a href="https://github.com/Pratik2895/F1race_Data_Engineering_DBricks">Databricks Lakehouse ETL Pipeline</a></h3>
+                <p>Architected a Bronze-Silver-Gold medallion architecture pipeline utilizing PySpark to process high-volume events.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <!-- PROJECT 2 IMAGE UPDATED -->
+              <a href="https://github.com/Pratik2895/" class="block-20 zoom-effect" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop');"></a>
+              <div class="text mt-3 float-right d-block">
+                <h3 class="heading"><a href="https://github.com/Pratik2895/">Clickstream Ingestion (Kafka to AWS)</a></h3>
+                <p>Designed a scalable ingestion pipeline routing streaming data into Amazon S3/Athena for BI reporting.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry">
+              <!-- PROJECT 3 IMAGE UPDATED -->
+              <a href="https://github.com/Pratik2895/" class="block-20 zoom-effect" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop');"></a>
+              <div class="text mt-3 float-right d-block">
+                <h3 class="heading"><a href="https://github.com/Pratik2895/Business-360-Insights">Power BI Financial Analytics</a></h3>
+                <p>Engineered comprehensive dashboards integrated with Azure Synapse to track revenue and executive KPIs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+	  </div>
+    </section>
+
+	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
+      <div class="container">
+		<div class="row d-md-flex align-items-center">
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text">
+                <strong class="number" data-number="5">0</strong>
+                <span>Certifications</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text">
+                <strong class="number" data-number="15">0</strong>
+                <span>Projects Delivered</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text">
+                <strong class="number" data-number="50">0</strong>
+                <span>+ Dashboards Built</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text">
+                <strong class="number" data-number="1000">0</strong>
+                <span>TB Data Processed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	
+	  <div class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg)">
+				<div class="row justify-content-center">
+					<div class="col-md-7 ftco-animate text-center">
+						<h2>Check out my code on <span> Github  </span> </h2>
+						<div class="heading"> <h4> I love optimizing big data architectures and engineering reliable data products. </h4>
+						<br>
+						<p><a href="https://github.com/Pratik2895/" target="_blank" class="btn btn-primary py-3 px-5">GitHub</a></p>
+						</div>
+					</div>
+				</div>
+		</div>
+	</section>
+
+    <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
+      <div class="container">
+      	<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h1 class="big big-2">Contact</h1>
+            <h2 class="mb-4">Contact Me</h2>
+            <p>Below are the details to reach out to me for Data Engineering/Analytics opportunities!</p>
+          </div>
+        </div>
+
+        <div class="row d-flex contact-info mb-5">
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center justify-content-center">
+          			<span class="icon-map-signs"></span>
+          		</div>
+          		<h3 class="mb-4">Location</h3>
+	            <p>Brampton, ON, Canada</p>
+	          </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center justify-content-center">
+          			<span class="icon-phone2"></span>
+          		</div>
+          		<h3 class="mb-4">Phone Number</h3>
+	            <p><a href="tel://+16476751131">+1 (647) 675-1131</a></p>
+	          </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center justify-content-center">
+          			<span class="icon-paper-plane"></span>
+          		</div>
+          		<h3 class="mb-4">Email Address</h3>
+	            <p><a href="mailto:bhikadi@uwindsor.ca">bhikadi@uwindsor.ca</a></p>
+	          </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center justify-content-center">
+          			<span class="icon-globe"></span>
+          		</div>
+          		<h3 class="mb-4">Download Resume</h3>
+                <!-- CV LINK UPDATED HERE -->
+	            <p><a href="PRATIK_A_BHIKADIYA_CV.pdf" target="_blank">Click Here</a></p>
+	          </div>
+          </div>
+
+		  <div class="container">
+			<br><br>
+			<div class="row justify-content-center">
+				<div class="col-md-7 ftco-animate text-center">
+					<h2>Have a<span> Question?  </span> <a href="mailto:bhikadi@uwindsor.ca" class="btn btn-primary py-3 px-5">Email Me</a> </h2>
+				</div>
+			</div>
+				<br>
+					<ul class="ftco-footer-social list-unstyled d-flex justify-content-center align-items-center mb-0">
+					  <li class="ftco-animate normal-txt">Connect with me  </li>
+					  <li class="ftco-animate"><a href="https://www.linkedin.com/in/pratikbhikadiya/" target="_blank"><span class="icon-linkedin"></span></a></li>  
+					  <li class="ftco-animate"><a href="https://github.com/Pratik2895/" target="_blank"><span class="icon-github"></span></a></li>
+					</ul>
+				<br>
+		   </div>
+   </div>
+ </section>
+
+    <footer class="ftco-footer ftco-section">
+		<div class="container">
+		  <div class="row">
+			<div class="col-md-12 text-center">
+			  <p>
+	Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+	          </p>
+			</div>
+		  </div>
+		</div>
+	  </footer>
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/scrollax.min.js"></script>
+  <script src="js/main.js"></script>
+    
+  </body>
+</html>
