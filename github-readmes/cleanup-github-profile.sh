@@ -25,6 +25,10 @@ set -u  # error on undefined vars, but NOT -e (we handle errors per-op)
 
 OWNER="Pratik2895"
 
+# Force every gh invocation in this script to hit PUBLIC github.com,
+# not an Enterprise host that might be set as the default (e.g. Intuit).
+export GH_HOST="github.com"
+
 # ---------- Bucket A: forks to DELETE ----------
 FORKS_TO_DELETE=(
   "AI_Fundamentals_Data_Domain"

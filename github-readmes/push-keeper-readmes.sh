@@ -24,6 +24,10 @@ set -u
 OWNER="Pratik2895"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Force every gh invocation in this script to hit PUBLIC github.com,
+# not an Enterprise host that might be set as the default (e.g. Intuit).
+export GH_HOST="github.com"
+
 # [local_md_file]="remote_repo_name"
 declare -a MAPPINGS=(
   "PROFILE_README.md|Pratik2895"
@@ -135,7 +139,7 @@ for mapping in "${MAPPINGS[@]}"; do
   work="$TMPDIR/$repo_name"
   (
     set -e
-    gh repo clone "$OWNER/$repo_name" "$work" -- --depth=1 --quiet 2>/dev/null
+    git clone --depth=1 --quiet "https://github.com/$OWNER/$repo_name.git" "$work" 2>/dev/null
     cd "$work"
 
     # Strip leading <!-- ... --> block from the local md, if present
