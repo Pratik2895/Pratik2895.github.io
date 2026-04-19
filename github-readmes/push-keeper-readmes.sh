@@ -26,12 +26,12 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # [local_md_file]="remote_repo_name"
 declare -a MAPPINGS=(
-  "PROFILE_README.md::Pratik2895"
-  "Pratik2895.github.io.md::Pratik2895.github.io"
-  "ontario-real-estate.md::ontario-real-estate"
-  "AI-Stock-Intelligence-CAN-US-Markets.md::AI-Stock-Intelligence-CAN-US-Markets"
-  "F1race_Data_Engineering_DBricks.md::F1race_Data_Engineering_DBricks"
-  "Marketing-Analyst-Technical-Assignment.md::Marketing-Analyst-Technical-Assignment"
+  "PROFILE_README.md|Pratik2895"
+  "Pratik2895.github.io.md|Pratik2895.github.io"
+  "ontario-real-estate.md|ontario-real-estate"
+  "AI-Stock-Intelligence-CAN-US-Markets.md|AI-Stock-Intelligence-CAN-US-Markets"
+  "F1race_Data_Engineering_DBricks.md|F1race_Data_Engineering_DBricks"
+  "Marketing-Analyst-Technical-Assignment.md|Marketing-Analyst-Technical-Assignment"
 )
 
 # ---------- colors ----------
@@ -77,7 +77,7 @@ echo "${GREEN}✓${RESET} Authenticated as ${BOLD}$AUTHED_USER${RESET}"
 echo
 echo "Will push README.md to ${#MAPPINGS[@]} repos:"
 for m in "${MAPPINGS[@]}"; do
-  IFS="::" read -r _ repo <<< "$m"
+  repo="${m#*|}"
   echo "  → $OWNER/$repo"
 done
 echo
@@ -93,7 +93,8 @@ trap 'rm -rf "$TMPDIR"' EXIT
 SUCCESS=0; SKIPPED=0; FAILED=0
 
 for mapping in "${MAPPINGS[@]}"; do
-  IFS="::" read -r local_file repo_name <<< "$mapping"
+  local_file="${mapping%|*}"
+  repo_name="${mapping#*|}"
   local_path="$SCRIPT_DIR/$local_file"
 
   echo "${BOLD}─── $repo_name ───${RESET}"
