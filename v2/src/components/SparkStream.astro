@@ -1,0 +1,181 @@
+---
+// Realistic Spark-driver style log feed — simulated, not connected to anything.
+// Pure client-side; completely honest that it's a simulation.
+---
+<section id="live" class="py-16 sm:py-20 relative">
+  <div class="container-custom">
+    <div class="grid lg:grid-cols-5 gap-8 items-start">
+      <!-- LEFT: context -->
+      <div class="lg:col-span-2 reveal">
+        <p class="eyebrow">How I work</p>
+        <h2 class="section-title">Reading the driver logs</h2>
+        <p class="text-ink-300 leading-relaxed mb-4">
+          Most of my day is spent reading Spark driver logs, chasing
+          skewed joins, and tuning shuffle partitions.
+        </p>
+        <p class="text-ink-400 leading-relaxed text-sm mb-6">
+          This is a <span class="text-brand">simulated feed</span> showing
+          the kind of events I see on a real ingestion job — executor starts,
+          stage completions, shuffle spills, skew warnings, Delta commits.
+          Click <span class="font-mono text-xs px-1.5 py-0.5 rounded bg-ink-800 text-ink-200 border border-ink-700">pause</span>
+          if it moves too fast.
+        </p>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="card-glow p-3">
+            <div class="text-[10px] uppercase tracking-wider text-ink-500 font-mono">Avg job</div>
+            <div class="text-lg font-bold text-white">7.4 min</div>
+            <div class="text-[10px] text-emerald-400">▼ 35% after tuning</div>
+          </div>
+          <div class="card-glow p-3">
+            <div class="text-[10px] uppercase tracking-wider text-ink-500 font-mono">SLA hit rate</div>
+            <div class="text-lg font-bold text-white">99.5%</div>
+            <div class="text-[10px] text-emerald-400">last 90 days</div>
+          </div>
+          <div class="card-glow p-3">
+            <div class="text-[10px] uppercase tracking-wider text-ink-500 font-mono">Peak throughput</div>
+            <div class="text-lg font-bold text-white">2.4 GB/s</div>
+            <div class="text-[10px] text-ink-400">shuffle read</div>
+          </div>
+          <div class="card-glow p-3">
+            <div class="text-[10px] uppercase tracking-wider text-ink-500 font-mono">Cluster</div>
+            <div class="text-lg font-bold text-white">EMR 6.x</div>
+            <div class="text-[10px] text-ink-400">Spark 3.4</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: terminal feed -->
+      <div class="lg:col-span-3 reveal">
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-brand/20 via-emerald-400/10 to-purple-500/20 rounded-xl blur-xl opacity-50"></div>
+
+          <div class="relative rounded-xl border border-ink-800 bg-ink-950/95 backdrop-blur-md overflow-hidden shadow-2xl font-mono text-[11px] sm:text-[12px] leading-[1.6]">
+            <!-- Title bar -->
+            <div class="flex items-center gap-1.5 px-3 py-2 border-b border-ink-800/80 bg-ink-900/70">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+              <span class="ml-2 text-[10px] text-ink-400 flex-1 truncate">spark-driver@emr-cluster:~$ tail -f ingest.log</span>
+              <button id="ss-pause"
+                class="text-[10px] px-2 py-0.5 rounded bg-ink-800 text-ink-200 border border-ink-700 hover:border-brand hover:text-brand transition-colors">
+                pause
+              </button>
+            </div>
+
+            <!-- Log container -->
+            <div id="ss-log" class="h-72 sm:h-80 overflow-hidden px-3 py-2 relative">
+              <!-- fade mask at top -->
+              <div class="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-ink-950/95 to-transparent pointer-events-none z-10"></div>
+              <div id="ss-lines" class="space-y-0.5"></div>
+            </div>
+
+            <!-- Status bar -->
+            <div class="flex items-center justify-between px-3 py-1.5 border-t border-ink-800/80 bg-ink-900/70 text-[10px]">
+              <div class="flex items-center gap-3 text-ink-400">
+                <span class="flex items-center gap-1 text-emerald-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  job: streaming-bronze-to-silver
+                </span>
+              </div>
+              <div class="flex items-center gap-2 text-ink-500">
+                <span>Exec:</span> <span class="text-brand">8</span>
+                <span>·</span>
+                <span>Cores:</span> <span class="text-brand">32</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-[10px] text-ink-500 mt-3 font-mono text-right">
+          * simulated driver log · events generated client-side for demo
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+  (function() {
+    const linesEl = document.getElementById('ss-lines');
+    const pauseBtn = document.getElementById('ss-pause');
+    if (!linesEl || !pauseBtn) return;
+
+    const TEMPLATES = [
+      { level: 'INFO',  weight: 60, gen: () => `Stage ${rand(40, 80)} (PythonRDD at map at ingest.py:${rand(42,120)}) finished in ${(rand(8,42)/10).toFixed(1)}s` },
+      { level: 'INFO',  weight: 50, gen: () => `Task ${rand(120, 499)}/${rand(500, 900)} completed (executor ${rand(1,8)})` },
+      { level: 'INFO',  weight: 30, gen: () => `Shuffle read: ${(rand(200,2400)/10).toFixed(1)}MB · write: ${(rand(100,1800)/10).toFixed(1)}MB` },
+      { level: 'INFO',  weight: 25, gen: () => `Broadcast variable bv_${rand(0,12)} created (${(rand(5,180)/10).toFixed(1)}MB)` },
+      { level: 'INFO',  weight: 20, gen: () => `Adaptive Execution: coalesced ${rand(200,800)} → ${rand(24,80)} partitions` },
+      { level: 'INFO',  weight: 20, gen: () => `Delta: txn committed, added ${rand(4,28)} files, ${rand(1000,50000).toLocaleString()} rows` },
+      { level: 'WARN',  weight: 8,  gen: () => `Skew detected in join key 'user_id' (hot key: usr_${rand(10000,99999)})` },
+      { level: 'WARN',  weight: 6,  gen: () => `Memory spill to disk: ${(rand(50,800)/10).toFixed(1)}MB on executor ${rand(1,8)}` },
+      { level: 'INFO',  weight: 15, gen: () => `AQE: dynamically switched SortMergeJoin → BroadcastHashJoin (${rand(1,5)}MB)` },
+      { level: 'INFO',  weight: 10, gen: () => `Checkpoint offsets written: {ingest_kafka: ${rand(800000, 999999)}}` },
+      { level: 'DEBUG', weight: 10, gen: () => `Catalyst optimized plan: ${rand(4,18)} rules applied` },
+      { level: 'INFO',  weight: 8,  gen: () => `Z-ORDER write to silver.events completed in ${(rand(12,85)/10).toFixed(1)}s` },
+    ];
+
+    const pool = [];
+    TEMPLATES.forEach((t) => { for (let i = 0; i < t.weight; i++) pool.push(t); });
+
+    function rand(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+
+    function fmtTime() {
+      const d = new Date();
+      const pad = (n) => n.toString().padStart(2, '0');
+      return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}.${d.getMilliseconds().toString().padStart(3,'0').slice(0,3)}`;
+    }
+
+    const levelClass = {
+      INFO:  'text-ink-300',
+      WARN:  'text-amber-300',
+      DEBUG: 'text-ink-500',
+      ERROR: 'text-red-400',
+    };
+    const levelLabelClass = {
+      INFO:  'text-emerald-400',
+      WARN:  'text-amber-400',
+      DEBUG: 'text-ink-500',
+      ERROR: 'text-red-400',
+    };
+
+    let paused = false;
+    pauseBtn.addEventListener('click', () => {
+      paused = !paused;
+      pauseBtn.textContent = paused ? 'resume' : 'pause';
+      pauseBtn.classList.toggle('text-brand', paused);
+    });
+
+    function appendLine() {
+      if (paused) return;
+      const t = pool[rand(0, pool.length - 1)];
+      const line = document.createElement('div');
+      line.className = 'opacity-0 transition-opacity duration-300';
+      line.innerHTML = `<span class="text-ink-600">${fmtTime()}</span> <span class="${levelLabelClass[t.level]}">[${t.level}]</span> <span class="${levelClass[t.level]}">${t.gen()}</span>`;
+      linesEl.appendChild(line);
+      requestAnimationFrame(() => line.style.opacity = '1');
+
+      // Keep only last ~18 lines so it doesn't grow forever
+      while (linesEl.children.length > 18) {
+        linesEl.removeChild(linesEl.firstChild);
+      }
+    }
+
+    // Seed immediately with a handful of lines so it doesn't look empty
+    for (let i = 0; i < 10; i++) appendLine();
+
+    // Only animate when visible
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !window.__ssTimer) {
+          window.__ssTimer = setInterval(appendLine, 650);
+        } else if (!e.isIntersecting && window.__ssTimer) {
+          clearInterval(window.__ssTimer);
+          window.__ssTimer = null;
+        }
+      });
+    }, { threshold: 0.2 });
+    obs.observe(document.getElementById('ss-log'));
+  })();
+  </script>
+</section>

@@ -1,0 +1,121 @@
+---
+const stats = [
+  { value: '5+',    label: 'Years',      sub: 'Experience' },
+  { value: '50+',   label: 'Dashboards', sub: 'Delivered' },
+  { value: '15+',   label: 'Pipelines',  sub: 'Shipped' },
+  { value: '99.5%', label: 'SLA',        sub: 'Hit rate' },
+];
+
+const facts = [
+  { k: 'Role',      v: 'Data / Analytics Engineer' },
+  { k: 'Current',   v: 'Intuit TurboTax' },
+  { k: 'Based in',  v: 'Brampton, ON 🇨🇦' },
+  { k: 'Education', v: 'M.M. — Business Data Analytics' },
+  { k: 'Domains',   v: 'Finance · Tax · Supply Chain' },
+  { k: 'Stack',     v: 'Databricks · PySpark · AWS · Azure' },
+];
+---
+<section id="about" class="section">
+  <div class="container-custom">
+    <div class="grid md:grid-cols-5 gap-12 items-start">
+      <!-- LEFT: narrative -->
+      <div class="md:col-span-3 reveal">
+        <p class="eyebrow">01 · About</p>
+        <h2 class="section-title">A little about me</h2>
+
+        <div class="space-y-4 text-ink-300 leading-relaxed text-base">
+          <p>
+            I'm a Data &amp; Analytics Engineer who enjoys the craft of turning
+            messy source data into reliable, well-modeled data products that
+            stakeholders <span class="text-white">actually trust</span>.
+          </p>
+          <p>
+            Currently at <a class="link-underline" href="https://turbotax.intuit.ca" target="_blank" rel="noopener">Intuit TurboTax</a>,
+            I architect DataMart pipelines for Marketing, Finance, Product and Sales —
+            Bronze/Silver/Gold on Databricks, Spark SQL on EMR, and SLA monitoring
+            on Databricks Workflows &amp; CloudWatch.
+          </p>
+          <p>
+            Before Intuit: BI Engineering at <span class="text-white">ArcelorMittal</span>
+            (Azure Databricks / ADF / Synapse) and BI Analytics at
+            <span class="text-white">Adani Ports &amp; SEZ</span> — 20+ executive
+            dashboards powering port operations, logistics, and finance.
+          </p>
+          <p class="text-ink-400 italic border-l-2 border-brand/60 pl-4 mt-6">
+            "Good data engineering is invisible. You only notice it when it fails."
+          </p>
+        </div>
+      </div>
+
+      <!-- RIGHT: at-a-glance glass card -->
+      <div class="md:col-span-2 reveal">
+        <div class="card-glow spotlight p-6 sm:p-7">
+          <div class="flex items-center justify-between mb-5">
+            <p class="text-[10px] uppercase tracking-[0.25em] text-ink-400 font-mono">
+              At a glance
+            </p>
+            <div class="flex gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand/70"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400/70"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400/70"></span>
+            </div>
+          </div>
+
+          <ul class="space-y-3">
+            {facts.map((f) => (
+              <li class="flex items-baseline justify-between gap-4 text-sm">
+                <span class="font-mono text-[11px] uppercase tracking-wider text-ink-500 flex-shrink-0">{f.k}</span>
+                <span class="text-ink-100 text-right">{f.v}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-6 pt-5 border-t border-ink-800/60">
+            <!-- Live rows-processed counter -->
+            <div class="text-center mb-4 px-3 py-3 rounded-lg bg-gradient-to-br from-brand/8 to-purple-500/5 border border-brand/25">
+              <div class="flex items-center justify-center gap-1.5 text-[9px] uppercase tracking-[0.18em] text-ink-500 font-mono mb-1">
+                <span class="relative flex h-1.5 w-1.5">
+                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75"></span>
+                  <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand"></span>
+                </span>
+                rows processed · career (est.)
+              </div>
+              <div id="about-rows-counter" class="text-2xl sm:text-3xl font-bold gradient-text font-mono tabular-nums tracking-tight">
+                0
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              {stats.map((s) => (
+                <div class="text-center py-2 px-3 rounded-lg bg-ink-950/50 border border-ink-800/60">
+                  <div class="text-xl font-bold gradient-text font-display">{s.value}</div>
+                  <div class="text-[9px] uppercase tracking-wider text-ink-500 mt-0.5">
+                    {s.label}
+                  </div>
+                  <div class="text-[9px] uppercase tracking-wider text-ink-600">{s.sub}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline>
+    (function() {
+      const el = document.getElementById('about-rows-counter');
+      if (!el) return;
+      // Base: ~1 trillion rows over 5 years, ticking at realistic rate
+      const BASE = 1_240_000_000_000;
+      const RATE_PER_SEC = 18_420; // rows/sec
+      const start = Date.now();
+      const tick = () => {
+        const n = BASE + Math.floor(((Date.now() - start) / 1000) * RATE_PER_SEC);
+        el.textContent = n.toLocaleString('en-US');
+      };
+      tick();
+      setInterval(tick, 120);
+    })();
+    </script>
+  </div>
+</section>

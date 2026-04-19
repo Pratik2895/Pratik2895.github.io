@@ -1,0 +1,140 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CmdK from '../components/CmdK.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'Pratik Bhikadiya — Data & Analytics Engineer',
+  description = 'Data & Analytics Engineer with 5+ years building production lakehouse pipelines on Databricks, PySpark, Delta Lake, and cloud data platforms (AWS, Azure).',
+  image = '/og-image.png',
+  canonical = Astro.url.href,
+} = Astro.props;
+
+const site = Astro.site?.toString() ?? 'https://pratik2895.github.io/';
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, site).toString()} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, site).toString()} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&display=swap"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Pratik Bhikadiya',
+      jobTitle: 'Data & Analytics Engineer',
+      url: site,
+      email: 'mailto:bhikadi@uwindsor.ca',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Brampton',
+        addressRegion: 'ON',
+        addressCountry: 'CA',
+      },
+      sameAs: [
+        'https://www.linkedin.com/in/pratikbhikadiya/',
+        'https://github.com/Pratik2895',
+      ],
+      knowsAbout: [
+        'PySpark', 'Databricks', 'Delta Lake', 'AWS', 'Azure',
+        'Data Engineering', 'Analytics Engineering', 'SQL', 'Python',
+      ],
+    })} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <div id="scroll-progress"></div>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-3 focus:py-2 focus:bg-brand focus:text-ink-950 focus:rounded"
+    >
+      Skip to content
+    </a>
+
+    <Nav />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <CmdK />
+
+    <script>
+      // Reveal-on-scroll
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in-view');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      // Scroll progress bar
+      const bar = document.getElementById('scroll-progress');
+      const updateBar = () => {
+        const h = document.documentElement;
+        const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+        if (bar) bar.style.width = Math.max(0, Math.min(100, pct)) + '%';
+      };
+      document.addEventListener('scroll', updateBar, { passive: true });
+      updateBar();
+
+      // Spotlight cursor tracking for .spotlight elements
+      document.querySelectorAll('.spotlight').forEach((el) => {
+        el.addEventListener('pointermove', (e) => {
+          const r = el.getBoundingClientRect();
+          const x = ((e.clientX - r.left) / r.width) * 100;
+          const y = ((e.clientY - r.top) / r.height) * 100;
+          el.style.setProperty('--mx', x + '%');
+          el.style.setProperty('--my', y + '%');
+        });
+      });
+
+      // Magnetic effect on [data-magnetic] buttons
+      document.querySelectorAll('[data-magnetic]').forEach((el) => {
+        const strength = 0.25;
+        el.addEventListener('pointermove', (e) => {
+          const r = el.getBoundingClientRect();
+          const x = e.clientX - (r.left + r.width / 2);
+          const y = e.clientY - (r.top + r.height / 2);
+          el.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+        });
+        el.addEventListener('pointerleave', () => {
+          el.style.transform = '';
+        });
+      });
+    </script>
+  </body>
+</html>

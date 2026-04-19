@@ -1,0 +1,50 @@
+---
+const links = [
+  { href: '/#about', label: 'About' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/#projects', label: 'Projects' },
+  { href: '/#skills', label: 'Skills' },
+  { href: '/#contact', label: 'Contact' },
+];
+---
+<header class="sticky top-0 z-40 backdrop-blur-md bg-ink-950/70 border-b border-ink-800/60">
+  <nav class="container-custom flex items-center justify-between h-16">
+    <a href="/" class="font-mono text-brand text-lg font-semibold hover:text-brand-300 transition-colors">
+      <span class="text-ink-400">&lt;</span>pratik<span class="text-ink-400">/&gt;</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-7 text-sm text-ink-300">
+      {links.map((l) => (
+        <li>
+          <a href={l.href} class="hover:text-brand transition-colors">{l.label}</a>
+        </li>
+      ))}
+    </ul>
+
+    <a href="/PRATIK_A_BHIKADIYA_CV.pdf" target="_blank" rel="noopener" class="btn btn-primary text-xs hidden sm:inline-flex">
+      Resume
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    </a>
+
+    <button id="nav-toggle" class="md:hidden text-ink-200" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden md:hidden border-t border-ink-800/60 bg-ink-950/95">
+    <ul class="container-custom py-4 flex flex-col gap-3 text-sm text-ink-200">
+      {links.map((l) => (
+        <li><a href={l.href} class="block py-1.5 hover:text-brand">{l.label}</a></li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+  menu?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => menu.classList.add('hidden'))
+  );
+</script>

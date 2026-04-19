@@ -1,0 +1,129 @@
+---
+// Compact animated SVG architecture diagram for project cards.
+// Each variant shows a real flow for that project.
+export interface Props {
+  variant: 'medallion' | 'rag' | 'azure' | 'analytics';
+  accent?: string; // override stroke color
+}
+const { variant } = Astro.props;
+
+// Node definitions per variant
+const diagrams: Record<string, { nodes: {x:number;y:number;label:string;tone?:string;icon?:string}[]; edges:[number,number][] }> = {
+  medallion: {
+    nodes: [
+      { x: 20,  y: 55, label: 'API',     tone: 'slate' },
+      { x: 90,  y: 55, label: 'Bronze',  tone: 'amber' },
+      { x: 160, y: 55, label: 'Silver',  tone: 'slate' },
+      { x: 230, y: 55, label: 'Gold',    tone: 'cyan' },
+      { x: 300, y: 55, label: 'App',     tone: 'violet' },
+    ],
+    edges: [[0,1],[1,2],[2,3],[3,4]],
+  },
+  rag: {
+    nodes: [
+      { x: 20,  y: 20, label: 'News',    tone: 'slate' },
+      { x: 20,  y: 55, label: 'Reddit',  tone: 'slate' },
+      { x: 20,  y: 90, label: 'yfinance', tone: 'slate' },
+      { x: 115, y: 55, label: 'Airflow', tone: 'amber' },
+      { x: 210, y: 30, label: 'Delta',   tone: 'cyan' },
+      { x: 210, y: 80, label: 'Chroma',  tone: 'violet' },
+      { x: 300, y: 55, label: 'RAG UI',  tone: 'cyan' },
+    ],
+    edges: [[0,3],[1,3],[2,3],[3,4],[3,5],[4,6],[5,6]],
+  },
+  azure: {
+    nodes: [
+      { x: 20,  y: 55, label: 'ADF',       tone: 'slate' },
+      { x: 100, y: 55, label: 'ADLS',      tone: 'amber' },
+      { x: 180, y: 55, label: 'Databricks', tone: 'cyan' },
+      { x: 260, y: 30, label: 'Unity Cat', tone: 'violet' },
+      { x: 260, y: 80, label: 'Power BI',  tone: 'cyan' },
+    ],
+    edges: [[0,1],[1,2],[2,3],[2,4]],
+  },
+  analytics: {
+    nodes: [
+      { x: 20,  y: 25, label: 'FB Ads',   tone: 'slate' },
+      { x: 20,  y: 55, label: 'Google',   tone: 'slate' },
+      { x: 20,  y: 85, label: 'TikTok',   tone: 'slate' },
+      { x: 140, y: 55, label: 'Unified Model', tone: 'cyan' },
+      { x: 260, y: 30, label: 'KPIs',     tone: 'violet' },
+      { x: 260, y: 80, label: 'QC Checks', tone: 'amber' },
+    ],
+    edges: [[0,3],[1,3],[2,3],[3,4],[3,5]],
+  },
+};
+
+const d = diagrams[variant];
+
+const tones: Record<string, {fill:string; stroke:string; text:string}> = {
+  slate:  { fill: 'rgba(71, 85, 105, 0.25)',  stroke: 'rgba(148, 163, 184, 0.55)', text: '#e2e8f0' },
+  amber:  { fill: 'rgba(251, 191, 36, 0.18)',  stroke: 'rgba(251, 191, 36, 0.7)',  text: '#fbbf24' },
+  cyan:   { fill: 'rgba(57, 239, 255, 0.18)',  stroke: 'rgba(57, 239, 255, 0.75)', text: '#39efff' },
+  violet: { fill: 'rgba(167, 139, 250, 0.18)', stroke: 'rgba(167, 139, 250, 0.75)', text: '#a78bfa' },
+};
+---
+<svg
+  viewBox="0 0 340 110"
+  class="w-full h-full"
+  aria-hidden="true"
+  preserveAspectRatio="xMidYMid meet"
+>
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id={`grid-${variant}`} width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.5" fill="rgba(255,255,255,0.06)"/>
+    </pattern>
+  </defs>
+  <rect width="340" height="110" fill={`url(#grid-${variant})`}/>
+
+  <!-- Edges with dataflow animation -->
+  {d.edges.map(([a, b]) => {
+    const na = d.nodes[a];
+    const nb = d.nodes[b];
+    const x1 = na.x + 22;
+    const y1 = na.y;
+    const x2 = nb.x - 22;
+    const y2 = nb.y;
+    return (
+      <g>
+        <line
+          x1={x1} y1={y1} x2={x2} y2={y2}
+          stroke="rgba(148, 163, 184, 0.25)"
+          stroke-width="1"
+        />
+        <line
+          x1={x1} y1={y1} x2={x2} y2={y2}
+          stroke="rgba(57, 239, 255, 0.9)"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          class="dataflow-path"
+        />
+      </g>
+    );
+  })}
+
+  <!-- Nodes -->
+  {d.nodes.map((n) => {
+    const t = tones[n.tone ?? 'slate'];
+    return (
+      <g>
+        <rect
+          x={n.x - 22} y={n.y - 11}
+          width="44" height="22" rx="6"
+          fill={t.fill}
+          stroke={t.stroke}
+          stroke-width="1"
+        />
+        <text
+          x={n.x} y={n.y + 3.5}
+          text-anchor="middle"
+          font-family="JetBrains Mono, monospace"
+          font-size="8"
+          font-weight="600"
+          fill={t.text}
+        >{n.label}</text>
+      </g>
+    );
+  })}
+</svg>
