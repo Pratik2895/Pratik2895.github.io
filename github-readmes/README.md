@@ -67,43 +67,55 @@ All of these are **forks** that clutter your repo list without adding signal:
 
 ---
 
-## 🛠️ Step-by-step execution
+## 🛠️ Step-by-step execution — **automated with 2 scripts**
 
-### Step 1 — Add READMEs to the 6 keeper repos (~15 min)
+Two bash scripts live alongside this README. Run them in order from this folder.
 
-For each keeper repo:
+### One-time setup — authenticate `gh` to public github.com
 
-1. Open `https://github.com/Pratik2895/<repo-name>`
-2. Click **Add file** → **Create new file** (or edit existing `README.md`)
-3. Name the file `README.md`
-4. Open the matching file from this folder (e.g. `ontario-real-estate.md`)
-5. Copy the contents (everything **after** the `<!-- comment block -->` at the top)
-6. Paste into GitHub, commit to `main`
+Your `gh` CLI may already be logged into GitHub Enterprise. Add public github.com:
 
-**Special case — the profile README:**
-- Go to `https://github.com/Pratik2895/Pratik2895`
-- If the repo doesn't exist: **New repository** → name it **exactly** `Pratik2895` (same as your username) → check "Add a README" → create
-- Paste contents from `PROFILE_README.md` into the README
-- Commit
+```bash
+gh auth login --hostname github.com
+# Choose: HTTPS → login with web browser
+# When prompted for scopes, grant:  repo, delete_repo
+```
 
-### Step 2 — Make Bucket 2 repos private (~5 min)
+Verify:
+```bash
+gh api user --hostname github.com --jq '.login'   # should print: Pratik2895
+```
 
-For each repo in Bucket 2:
+### Step 1 — Push READMEs to all 6 keeper repos (~2 min)
 
-1. Open the repo → **Settings** (top-right tab)
-2. Scroll all the way down to **Danger Zone**
-3. Click **Change repository visibility** → **Make private**
-4. Type the repo name to confirm
+```bash
+cd github-readmes
+bash push-keeper-readmes.sh
+```
 
-### Step 3 — Delete Bucket 3 forks (~5 min)
+- Auto-creates the special `Pratik2895/Pratik2895` profile repo if missing
+- Asks `y/N` before pushing to each repo
+- Strips the HTML comment header and commits a clean `README.md`
+- Safe to re-run — it simply overwrites `README.md`
 
-For each fork in Bucket 3:
+### Step 2 — Delete forks + make noise repos private (~3 min)
 
-1. Open the repo → **Settings**
-2. Scroll to **Danger Zone** → **Delete this repository**
-3. Type `Pratik2895/<repo-name>` to confirm
+```bash
+bash cleanup-github-profile.sh
+```
 
-### Step 4 — Pin your 6 keepers (~2 min)
+- **Asks `y/N` before every destructive action** — default is **N (skip)**
+- Extra safety: verifies a repo is actually a fork before offering to delete
+- Skips repos that are already private or already gone
+- Prints a summary at the end
+
+**What gets prompted:**
+- 13 fork deletes (Bucket 3) — one prompt per fork, each asks explicit confirmation
+- 10 visibility flips (Bucket 2) — one prompt per repo
+
+Hit **Enter** (default N) on anything you want to keep. Hit **y** to confirm.
+
+### Step 3 — Pin your 6 keepers (~2 min)
 
 1. Go to your profile: `https://github.com/Pratik2895`
 2. Click **Customize your pins**
@@ -116,7 +128,7 @@ For each fork in Bucket 3:
    - ☑️ *(optional 6th)* `Promotional-Analytics-Unveiling-Success-Strategies` if you want a retail story
 4. **Save pins**
 
-### Step 5 — Update your GitHub bio (~30 sec)
+### Step 4 — Update your GitHub bio (~30 sec)
 
 On your profile page → click **Edit profile**:
 
