@@ -142,13 +142,10 @@ for mapping in "${MAPPINGS[@]}"; do
     git clone --depth=1 --quiet "https://github.com/$OWNER/$repo_name.git" "$work" 2>/dev/null
     cd "$work"
 
-    # Strip leading <!-- ... --> block from the local md, if present
-    # This removes everything from the first `<!--` through the matching `-->`
-    awk 'BEGIN{inhdr=0; done=0}
-         /^<!--/ && !done {inhdr=1; next}
-         inhdr && /-->/ {inhdr=0; done=1; next}
-         inhdr {next}
-         {print}' "$local_path" > README.md
+    # Strip the leading HTML-comment block (single-line or multi-line).
+    # Uses Perl in slurp mode so it handles the comment whether it's on one
+    # line or spans many. Also trims the blank line(s) immediately after.
+    perl -0777 -pe 's/\A<!--.*?-->\s*\n//s' "$local_path" > README.md
 
     git add README.md
     # Configure committer if not already (GH auth uses your token for push)
