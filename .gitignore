@@ -1,0 +1,12 @@
+# Build artifacts
+v2/node_modules/
+v2/dist/
+v2/.astro/
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Local archive of old Colorlib template (not shipped)
+.v1-archive/

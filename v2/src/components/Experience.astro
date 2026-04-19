@@ -1,0 +1,124 @@
+---
+const jobs = [
+  {
+    company: 'Intuit TurboTax',
+    mark: 'IT',
+    markColor: 'from-emerald-400 to-cyan-400',
+    location: 'Brampton, ON',
+    title: 'Data Engineer / Analytics Engineer',
+    period: 'Apr 2024 – Present',
+    bullets: [
+      'Architected enterprise DataMart pipelines (Marketing, Finance, Product, Sales) on Databricks + PySpark, reducing end-to-end latency by 35%.',
+      'Designed scalable clickstream ingestion (Kafka → EMR/Databricks) processing millions of daily events.',
+      'Implemented Bronze-Silver-Gold medallion architecture with incremental Delta processing and schema enforcement.',
+      'Built automated SLA monitoring (Databricks Workflows + CloudWatch), improving MTTR by 40%.',
+    ],
+    tags: ['Databricks', 'PySpark', 'Delta Lake', 'Kafka', 'EMR', 'AWS'],
+  },
+  {
+    company: 'ArcelorMittal Nippon Steel India',
+    mark: 'AM',
+    markColor: 'from-orange-400 to-red-500',
+    location: 'India',
+    title: 'BI Engineer',
+    period: 'Apr 2022 – Dec 2022',
+    bullets: [
+      'Developed Spark transformation pipelines on Azure Databricks integrating Azure SQL, Blob Storage & Synapse.',
+      'Orchestrated enterprise ETL workflows in Azure Data Factory, cutting manual intervention by 40%.',
+      'Engineered curated data mart layers with referential integrity controls for monthly executive reporting.',
+    ],
+    tags: ['Azure Databricks', 'ADF', 'Synapse', 'Spark SQL'],
+  },
+  {
+    company: 'Adani Ports and SEZ Ltd.',
+    mark: 'AP',
+    markColor: 'from-blue-400 to-indigo-500',
+    location: 'India',
+    title: 'BI Analyst',
+    period: 'Jun 2016 – Mar 2022',
+    bullets: [
+      'Built large-scale ETL workflows and warehouse schemas supporting port operations, logistics & finance.',
+      'Improved data processing efficiency by 20% via SQL optimization while maintaining 99.5% SLA compliance.',
+      'Delivered 20+ executive dashboards (Power BI / Tableau) tracking operational KPIs, revenue & cargo throughput.',
+    ],
+    tags: ['SQL', 'Power BI', 'Tableau', 'ETL'],
+  },
+];
+
+const education = [
+  { school: 'University of Windsor, Canada', degree: 'Master of Management (Honors) — Business Data Analytics', period: '2023 – 2024' },
+  { school: 'Maharaja Sayajirao University',  degree: 'PG Diploma (Honors) — Marketing Management',             period: '2020 – 2021' },
+  { school: 'Maharaja Sayajirao University',  degree: 'B.Tech (Honors) — Engineering',                          period: '2012 – 2016' },
+];
+---
+<section id="experience" class="section">
+  <div class="container-custom">
+    <div class="mb-14 reveal">
+      <p class="eyebrow">02 · Experience</p>
+      <h2 class="section-title">Where I've shipped</h2>
+      <p class="text-ink-400 max-w-2xl">
+        A career timeline across three industries — fintech, heavy industry, and
+        logistics. Different domains, same commitment to trustworthy data.
+      </p>
+    </div>
+
+    <!-- Timeline with animated spine -->
+    <ol class="relative space-y-8 before:content-[''] before:absolute before:left-[23px] before:top-4 before:bottom-4 before:w-px before:bg-gradient-to-b before:from-brand/60 before:via-ink-700 before:to-transparent">
+      {jobs.map((j, i) => (
+        <li class="relative pl-16 reveal" style={`animation-delay: ${i * 100}ms`}>
+          <!-- Node with company mark -->
+          <div class={`absolute left-0 top-3 w-12 h-12 rounded-xl bg-gradient-to-br ${j.markColor} flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-brand/20 ring-4 ring-ink-950`}>
+            {j.mark}
+          </div>
+
+          <article class="card-glow spotlight card-hover p-6">
+            <header class="flex flex-wrap items-start justify-between gap-3 mb-1">
+              <div>
+                <h3 class="text-lg sm:text-xl font-semibold text-white">{j.title}</h3>
+                <p class="text-brand text-sm font-mono mt-0.5">{j.company}</p>
+              </div>
+              <div class="text-right">
+                <span class="inline-block font-mono text-xs text-ink-300 px-2.5 py-1 rounded-md bg-ink-900/60 border border-ink-800">
+                  {j.period}
+                </span>
+                <p class="text-[10px] text-ink-500 mt-1 font-mono uppercase tracking-wider">{j.location}</p>
+              </div>
+            </header>
+
+            <ul class="mt-4 space-y-2.5 text-sm text-ink-300 leading-relaxed">
+              {j.bullets.map((b) => (
+                <li class="flex gap-3">
+                  <span class="text-brand mt-1.5 flex-shrink-0">
+                    <svg width="6" height="6" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
+                  </span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-5 flex flex-wrap gap-1.5">
+              {j.tags.map((t) => <span class="chip">{t}</span>)}
+            </div>
+          </article>
+        </li>
+      ))}
+    </ol>
+
+    <!-- Education -->
+    <div class="mt-20 reveal">
+      <div class="flex items-end justify-between mb-6">
+        <h3 class="text-2xl font-display font-bold text-white">Education</h3>
+        <span class="text-[10px] uppercase tracking-[0.2em] text-ink-500 font-mono">Degrees · Honors</span>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        {education.map((e) => (
+          <div class="card-glow spotlight card-hover p-5">
+            <span class="font-mono text-xs text-brand">{e.period}</span>
+            <p class="mt-3 text-white font-semibold text-sm leading-snug">{e.degree}</p>
+            <p class="text-ink-400 text-xs mt-2">{e.school}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

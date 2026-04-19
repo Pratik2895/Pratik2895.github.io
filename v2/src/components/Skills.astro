@@ -1,0 +1,70 @@
+---
+const groups = [
+  {
+    title: 'Data Engineering',
+    accent: 'cyan',
+    items: ['PySpark', 'Spark SQL', 'Delta Lake', 'Databricks', 'Airflow', 'Kafka', 'EMR', 'Unity Catalog'],
+  },
+  {
+    title: 'Cloud',
+    accent: 'violet',
+    items: ['AWS S3', 'AWS EMR', 'AWS Athena', 'CloudWatch', 'Azure Databricks', 'Azure Data Factory', 'Azure Synapse', 'ADLS Gen2'],
+  },
+  {
+    title: 'Languages & Warehousing',
+    accent: 'emerald',
+    items: ['Python', 'SQL', 'T-SQL', 'Scala', 'Snowflake', 'BigQuery'],
+  },
+  {
+    title: 'BI & Viz',
+    accent: 'amber',
+    items: ['Power BI', 'Tableau', 'Streamlit', 'Plotly', 'dbt'],
+  },
+  {
+    title: 'Ops & Governance',
+    accent: 'cyan',
+    items: ['SLA Monitoring', 'Data Quality', 'CI/CD', 'Git', 'Docker', 'Medallion Architecture'],
+  },
+  {
+    title: 'AI / GenAI',
+    accent: 'violet',
+    items: ['RAG', 'ChromaDB', 'LLM APIs', 'Gemini', 'Claude', 'Sentiment / NLP'],
+  },
+];
+---
+<section id="skills" class="section relative">
+  <!-- Accent glow behind section -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-brand/5 blur-3xl"></div>
+  </div>
+
+  <div class="container-custom relative">
+    <div class="mb-14 reveal">
+      <p class="eyebrow">04 · Skills</p>
+      <h2 class="section-title">Tools I build with</h2>
+      <p class="text-ink-400 max-w-2xl">
+        Grouped by where they live in the stack — with the tools I reach for most.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {groups.map((g, i) => (
+        <div class={`accent-${g.accent} card-glow spotlight card-hover accent-border p-6 reveal`} style={`animation-delay: ${i * 80}ms`}>
+          <div class="flex items-center justify-between mb-5">
+            <h3 class="text-sm font-semibold accent-text font-mono uppercase tracking-wider">
+              {g.title}
+            </h3>
+            <span class="font-mono text-[10px] text-ink-500">0{i + 1}</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            {g.items.map((s) => (
+              <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-medium bg-ink-900/60 text-ink-200 border border-ink-800/80 hover:border-[color:var(--accent)] hover:accent-text transition-colors cursor-default">
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

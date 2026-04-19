@@ -1,0 +1,223 @@
+---
+// Medallion architecture flow — Bronze → Silver → Gold
+// Fully animated SVG with data particles flowing between layers.
+// Realistic throughput labels. Explainable: this is the pattern I use every day.
+const layers = [
+  {
+    key: 'bronze',
+    name: 'Bronze',
+    subtitle: 'Raw',
+    role: 'Schema-on-read landing of source events',
+    throughput: '18.4K rows/s',
+    color: '#c2410c',       // bronze/copper
+    glow:  'rgba(194, 65, 12, 0.35)',
+  },
+  {
+    key: 'silver',
+    name: 'Silver',
+    subtitle: 'Cleaned',
+    role: 'Dedup, typecast, schema enforced',
+    throughput: '12.7K rows/s',
+    color: '#94a3b8',       // silver
+    glow:  'rgba(148, 163, 184, 0.35)',
+  },
+  {
+    key: 'gold',
+    name: 'Gold',
+    subtitle: 'Curated',
+    role: 'Business aggregates · served to BI',
+    throughput: '6.2K rows/s',
+    color: '#fbbf24',       // gold
+    glow:  'rgba(251, 191, 36, 0.35)',
+  },
+];
+---
+<div class="relative group max-w-sm mx-auto md:ml-auto w-full">
+  <div class="absolute -inset-2 bg-gradient-to-r from-orange-500/20 via-slate-400/10 to-amber-400/20 rounded-xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity"></div>
+
+  <div class="relative rounded-xl border border-ink-800 bg-ink-950/90 backdrop-blur-md overflow-hidden shadow-2xl">
+    <!-- Title bar -->
+    <div class="flex items-center gap-2 px-3 py-2 border-b border-ink-800/80 bg-ink-900/50 font-mono">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-brand">
+        <path d="M3 12h4l3-9 4 18 3-9h4"/>
+      </svg>
+      <span class="text-[10px] text-white font-semibold flex-1">medallion-lakehouse.flow</span>
+      <span class="inline-flex items-center gap-1 text-[9px] text-emerald-400">
+        <span class="relative flex h-1.5 w-1.5">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+        </span>
+        streaming
+      </span>
+    </div>
+
+    <!-- SVG flow diagram -->
+    <div class="px-4 py-5 bg-gradient-to-b from-ink-950 to-ink-900/60">
+      <svg viewBox="0 0 320 200" class="w-full h-auto" aria-hidden="true">
+        <defs>
+          <!-- Glow filters -->
+          <filter id="mf-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+
+          <!-- Gradient strokes -->
+          <linearGradient id="grad-bronze-silver" x1="0" x2="1">
+            <stop offset="0%" stop-color="#c2410c"/>
+            <stop offset="100%" stop-color="#94a3b8"/>
+          </linearGradient>
+          <linearGradient id="grad-silver-gold" x1="0" x2="1">
+            <stop offset="0%" stop-color="#94a3b8"/>
+            <stop offset="100%" stop-color="#fbbf24"/>
+          </linearGradient>
+
+          <!-- Source arrow -->
+          <linearGradient id="grad-src" x1="0" x2="1">
+            <stop offset="0%" stop-color="#39efff"/>
+            <stop offset="100%" stop-color="#c2410c"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Grid dots -->
+        <pattern id="mf-grid" width="12" height="12" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r="0.5" fill="rgba(255,255,255,0.06)"/>
+        </pattern>
+        <rect width="320" height="200" fill="url(#mf-grid)"/>
+
+        <!-- Source node (Kafka / API) -->
+        <g>
+          <rect x="8" y="85" width="42" height="30" rx="6"
+                fill="rgba(57, 239, 255, 0.15)"
+                stroke="rgba(57, 239, 255, 0.6)"
+                stroke-width="1"/>
+          <text x="29" y="100" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="8" font-weight="600" fill="#39efff">Kafka</text>
+          <text x="29" y="109" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="6" fill="#67e8f9">+ APIs</text>
+        </g>
+
+        <!-- Bronze -->
+        <g filter="url(#mf-glow)">
+          <rect x="68" y="78" width="58" height="44" rx="8"
+                fill="rgba(194, 65, 12, 0.18)"
+                stroke="#c2410c"
+                stroke-width="1.5"/>
+          <text x="97" y="95" text-anchor="middle" font-family="Inter, sans-serif"
+                font-size="10" font-weight="700" fill="#fed7aa">Bronze</text>
+          <text x="97" y="107" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="7" fill="#fdba74">Raw</text>
+          <text x="97" y="116" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="6" fill="#fb923c">18.4K/s</text>
+        </g>
+
+        <!-- Silver -->
+        <g filter="url(#mf-glow)">
+          <rect x="144" y="78" width="58" height="44" rx="8"
+                fill="rgba(148, 163, 184, 0.18)"
+                stroke="#94a3b8"
+                stroke-width="1.5"/>
+          <text x="173" y="95" text-anchor="middle" font-family="Inter, sans-serif"
+                font-size="10" font-weight="700" fill="#e2e8f0">Silver</text>
+          <text x="173" y="107" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="7" fill="#cbd5e1">Cleaned</text>
+          <text x="173" y="116" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="6" fill="#94a3b8">12.7K/s</text>
+        </g>
+
+        <!-- Gold -->
+        <g filter="url(#mf-glow)">
+          <rect x="220" y="78" width="58" height="44" rx="8"
+                fill="rgba(251, 191, 36, 0.18)"
+                stroke="#fbbf24"
+                stroke-width="1.5"/>
+          <text x="249" y="95" text-anchor="middle" font-family="Inter, sans-serif"
+                font-size="10" font-weight="700" fill="#fef3c7">Gold</text>
+          <text x="249" y="107" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="7" fill="#fde68a">Curated</text>
+          <text x="249" y="116" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="6" fill="#fbbf24">6.2K/s</text>
+        </g>
+
+        <!-- Serving layer -->
+        <g>
+          <rect x="285" y="70" width="28" height="28" rx="4"
+                fill="rgba(167, 139, 250, 0.15)"
+                stroke="rgba(167, 139, 250, 0.6)"
+                stroke-width="1"/>
+          <text x="299" y="86" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="6" font-weight="600" fill="#a78bfa">BI</text>
+          <text x="299" y="92" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="5" fill="#a78bfa">Models</text>
+          <rect x="285" y="102" width="28" height="28" rx="4"
+                fill="rgba(167, 139, 250, 0.15)"
+                stroke="rgba(167, 139, 250, 0.6)"
+                stroke-width="1"/>
+          <text x="299" y="118" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="6" font-weight="600" fill="#a78bfa">ML</text>
+          <text x="299" y="124" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="5" fill="#a78bfa">Features</text>
+        </g>
+
+        <!-- Connecting pipes -->
+        <line x1="50" y1="100" x2="68" y2="100" stroke="url(#grad-src)" stroke-width="1.5" opacity="0.5"/>
+        <line x1="126" y1="100" x2="144" y2="100" stroke="url(#grad-bronze-silver)" stroke-width="1.5" opacity="0.5"/>
+        <line x1="202" y1="100" x2="220" y2="100" stroke="url(#grad-silver-gold)" stroke-width="1.5" opacity="0.5"/>
+        <line x1="278" y1="100" x2="285" y2="84" stroke="#a78bfa" stroke-width="1" opacity="0.4"/>
+        <line x1="278" y1="100" x2="285" y2="116" stroke="#a78bfa" stroke-width="1" opacity="0.4"/>
+
+        <!-- Animated particles (data flowing) -->
+        <circle r="2" fill="#39efff">
+          <animateMotion dur="2s" repeatCount="indefinite"
+            path="M 50,100 L 68,100 L 126,100 L 144,100 L 202,100 L 220,100 L 278,100 L 285,84"/>
+        </circle>
+        <circle r="1.8" fill="#fbbf24">
+          <animateMotion dur="2.4s" begin="0.5s" repeatCount="indefinite"
+            path="M 50,100 L 68,100 L 126,100 L 144,100 L 202,100 L 220,100 L 278,100 L 285,116"/>
+        </circle>
+        <circle r="1.6" fill="#c2410c">
+          <animateMotion dur="1.8s" begin="1s" repeatCount="indefinite"
+            path="M 50,100 L 68,100 L 126,100 L 144,100 L 202,100 L 220,100 L 278,100 L 285,84"/>
+        </circle>
+        <circle r="2" fill="#94a3b8">
+          <animateMotion dur="2.2s" begin="0.3s" repeatCount="indefinite"
+            path="M 50,100 L 68,100 L 126,100 L 144,100 L 202,100 L 220,100 L 278,100 L 285,116"/>
+        </circle>
+
+        <!-- Layer labels below -->
+        <text x="29" y="155" text-anchor="middle" font-family="JetBrains Mono, monospace"
+              font-size="6" fill="#64748b" letter-spacing="0.5">SOURCE</text>
+        <text x="97" y="155" text-anchor="middle" font-family="JetBrains Mono, monospace"
+              font-size="6" fill="#64748b" letter-spacing="0.5">LAND</text>
+        <text x="173" y="155" text-anchor="middle" font-family="JetBrains Mono, monospace"
+              font-size="6" fill="#64748b" letter-spacing="0.5">CLEAN</text>
+        <text x="249" y="155" text-anchor="middle" font-family="JetBrains Mono, monospace"
+              font-size="6" fill="#64748b" letter-spacing="0.5">SERVE</text>
+        <text x="299" y="155" text-anchor="middle" font-family="JetBrains Mono, monospace"
+              font-size="6" fill="#64748b" letter-spacing="0.5">USE</text>
+
+        <!-- Orchestration caption -->
+        <text x="160" y="180" text-anchor="middle" font-family="JetBrains Mono, monospace"
+              font-size="7" fill="#475569">Orchestrated by Databricks Workflows · Airflow</text>
+        <text x="160" y="190" text-anchor="middle" font-family="JetBrains Mono, monospace"
+              font-size="7" fill="#475569">Storage: Delta Lake on S3 / ADLS</text>
+      </svg>
+    </div>
+
+    <!-- Status bar -->
+    <div class="flex items-center justify-between px-3 py-1.5 border-t border-ink-800/80 bg-ink-900/50 text-[10px] font-mono">
+      <div class="flex items-center gap-3">
+        <span class="flex items-center gap-1 text-emerald-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          pipeline: healthy
+        </span>
+      </div>
+      <div class="flex items-center gap-2 text-ink-500">
+        <span>Delta Lake</span>
+        <span class="text-brand font-semibold">ACID</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+---
+import MedallionFlow from './MedallionFlow.astro';
+
+const roles = [
+  'Data Engineer',
+  'Analytics Engineer',
+  'Lakehouse Architect',
+  'BI Engineer',
+];
+---
+<section class="relative pt-16 pb-20 sm:pt-24 sm:pb-28 overflow-hidden">
+  <!-- Floating tech orbs -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <div class="absolute top-20 right-[10%] w-72 h-72 rounded-full bg-brand/10 blur-3xl animate-pulse" style="animation-duration: 6s;"></div>
+    <div class="absolute bottom-10 left-[5%] w-64 h-64 rounded-full bg-purple-500/10 blur-3xl animate-pulse" style="animation-duration: 8s; animation-delay: 1s;"></div>
+  </div>
+
+  <div class="container-custom relative">
+    <div class="grid md:grid-cols-12 gap-10 items-center">
+      <!-- LEFT: Identity -->
+      <div class="md:col-span-7 space-y-6 reveal">
+        <div>
+          <p class="eyebrow mb-4">Hello, I'm</p>
+          <h1 class="font-display text-5xl sm:text-7xl font-bold tracking-tight leading-[0.95]">
+            <span class="text-white block">Pratik</span>
+            <span class="gradient-text block">Bhikadiya.</span>
+          </h1>
+        </div>
+
+        <h2 class="text-xl sm:text-2xl text-ink-300 font-medium font-mono min-h-[2.2rem]">
+          <span class="text-ink-500">&gt;</span>
+          <span id="role-rotator" class="text-brand">Data Engineer</span><span
+            id="role-cursor"
+            class="inline-block w-[3px] h-6 bg-brand align-middle ml-0.5 animate-pulse"
+          ></span>
+        </h2>
+
+        <p class="text-ink-300 text-base sm:text-lg max-w-xl leading-relaxed">
+          I build <strong class="text-white">production-grade lakehouse pipelines</strong> —
+          Bronze/Silver/Gold on Databricks, real-time clickstream on Kafka+EMR, and
+          SLA-monitored analytics for <span class="text-brand">Intuit TurboTax</span>.
+          5+ years turning raw events into trusted data products.
+        </p>
+
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a href="/#projects" data-magnetic class="btn btn-primary transition-transform duration-200">
+            Explore Work
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="/PRATIK_A_BHIKADIYA_CV.pdf" target="_blank" rel="noopener" data-magnetic class="btn btn-ghost transition-transform duration-200">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Resume
+          </a>
+          <a href="https://github.com/Pratik2895" target="_blank" rel="noopener" class="btn btn-ghost">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.26.82-.577v-2.17c-3.338.725-4.042-1.61-4.042-1.61-.547-1.386-1.335-1.756-1.335-1.756-1.09-.744.083-.729.083-.729 1.205.085 1.838 1.237 1.838 1.237 1.07 1.835 2.81 1.305 3.495.997.107-.776.418-1.305.762-1.605-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.468-2.38 1.236-3.22-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23A11.48 11.48 0 0 1 12 5.8c1.02 0 2.047.138 3.006.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.48 5.92.43.37.812 1.1.812 2.22v3.29c0 .32.217.694.825.576C20.565 21.797 24 17.297 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/pratikbhikadiya/" target="_blank" rel="noopener" class="btn btn-ghost">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.45zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.99 0 1.78-.78 1.78-1.73V1.73C24 .77 23.21 0 22.22 0z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+
+        <div class="pt-6 border-t border-ink-800/60 max-w-md">
+          <p class="text-[10px] uppercase tracking-[0.2em] text-ink-500 font-mono mb-3">Certified</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip chip-brand">Databricks Data Engineer</span>
+            <span class="chip chip-brand">Azure DP-203</span>
+            <span class="chip chip-brand">Power BI PL-300</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Profile + IDE card stacked -->
+      <div class="md:col-span-5 space-y-6 reveal">
+        <!-- Profile image -->
+        <div class="relative max-w-sm mx-auto md:ml-auto">
+          <div class="absolute -inset-4 bg-gradient-to-br from-brand/30 via-purple-500/20 to-transparent rounded-2xl blur-2xl"></div>
+          <div class="relative rounded-2xl overflow-hidden border border-brand/20 shadow-2xl">
+            <img
+              src="/images/profile.png"
+              alt="Pratik Bhikadiya"
+              width="420"
+              height="520"
+              loading="eager"
+              decoding="async"
+              class="w-full h-auto object-cover aspect-[4/5]"
+            />
+            <!-- Overlay gradient -->
+            <div class="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-transparent pointer-events-none"></div>
+            <!-- Stats overlay -->
+            <div class="absolute bottom-3 inset-x-3 grid grid-cols-3 gap-2 text-center">
+              <div class="rounded-lg bg-ink-950/70 backdrop-blur px-2 py-1.5 border border-ink-800/60">
+                <div class="text-brand text-sm font-bold font-mono">5+</div>
+                <div class="text-[9px] uppercase tracking-wider text-ink-400">Years</div>
+              </div>
+              <div class="rounded-lg bg-ink-950/70 backdrop-blur px-2 py-1.5 border border-ink-800/60">
+                <div class="text-brand text-sm font-bold font-mono">1PB+</div>
+                <div class="text-[9px] uppercase tracking-wider text-ink-400">Data</div>
+              </div>
+              <div class="rounded-lg bg-ink-950/70 backdrop-blur px-2 py-1.5 border border-ink-800/60">
+                <div class="text-brand text-sm font-bold font-mono">3</div>
+                <div class="text-[9px] uppercase tracking-wider text-ink-400">Certs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <MedallionFlow />
+      </div>
+    </div>
+
+    <!-- Tech stack ticker -->
+    <div class="mt-16 pt-8 border-t border-ink-800/50 reveal">
+      <p class="text-[10px] uppercase tracking-[0.3em] text-ink-500 font-mono mb-5 text-center">
+        Daily driver stack
+      </p>
+      <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-ink-400">
+        {['PySpark', 'Databricks', 'Delta Lake', 'AWS', 'Azure', 'Airflow', 'Kafka', 'SQL', 'Python', 'dbt'].map((t) => (
+          <span class="text-sm font-mono hover:text-brand transition-colors cursor-default">{t}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <script is:inline define:vars={{ roles }}>
+    const el = document.getElementById('role-rotator');
+    if (el) {
+      let idx = 0, char = 0, deleting = false;
+      const tick = () => {
+        const word = roles[idx];
+        el.textContent = word.slice(0, char);
+        if (!deleting && char < word.length) {
+          char++;
+          setTimeout(tick, 80);
+        } else if (!deleting && char === word.length) {
+          deleting = true;
+          setTimeout(tick, 1600);
+        } else if (deleting && char > 0) {
+          char--;
+          setTimeout(tick, 40);
+        } else {
+          deleting = false;
+          idx = (idx + 1) % roles.length;
+          setTimeout(tick, 200);
+        }
+      };
+      tick();
+    }
+  </script>
+</section>
